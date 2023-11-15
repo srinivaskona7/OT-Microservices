@@ -20,3 +20,44 @@ spec:
         image: sriniv7654/ultimate-cicd:3
         ports:
         - containerPort: 8080
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empms-attendance
+spec:
+  replicas: 1 # Set the desired number of replicas
+  selector:
+    matchLabels:
+      app: empms-attendance
+  template:
+    metadata:
+      labels:
+        app: empms-attendance
+    spec:
+      containers:
+        - name: empms-attendance
+          image: sriniv7654/attendance:
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config.yaml
+              readOnly: true
+          env:
+            - name: CONFIG_FILE
+              value: "/app/config.yaml"
+            - name: API_PORT
+              value: "8081" # Environment variable for attendance api_port
+            - name: DB_NAME
+              value: "attendance_db" # Environment variable for mysql db_name
+            - name: DB_HOST
+              value: "172.17.0.2" # Environment variable for mysql host
+            - name: DB_USERNAME
+              value: "root" # Environment variable for mysql username
+            - name: DB_PASSWORD
+              value: "password" # Environment variable for mysql password
+      volumes:
+        - name: config-volume
+          hostPath:
+            path: ./attendance/config.yaml # Define the path to the config file
+
+          
