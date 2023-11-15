@@ -16,10 +16,6 @@ spec:
       containers:
         - name: empms-attendance
           image: sriniv7654/ot-attendence:2
-          volumeMounts:
-            - name: config-volume
-              mountPath: /app/config.yaml
-              readOnly: true
           env:
             - name: CONFIG_FILE
               value: "/app/config.yaml"
@@ -33,9 +29,7 @@ spec:
               value: "root" # Environment variable for mysql username
             - name: DB_PASSWORD
               value: "password" # Environment variable for mysql password
-      volumes:
-        - name: config-volume
-          hostPath:
-            path: ./attendance/config.yaml # Define the path to the config file
+       
 
           
+
