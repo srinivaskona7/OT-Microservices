@@ -18,7 +18,7 @@ spec:
           image: sriniv7654/ot-attendence:2
           env:
             - name: CONFIG_FILE
-              value: "/app/config.yaml"
+              value: "/app/config/config.yaml"
             - name: API_PORT
               value: "8081" # Environment variable for attendance api_port
             - name: DB_NAME
