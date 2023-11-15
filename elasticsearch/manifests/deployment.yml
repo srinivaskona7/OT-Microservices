@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: empms-es
-          image: docker.elastic.co/elasticsearch/elasticsearch:8.4.3 # Elasticsearch image version
+          image: sriniv7654/ot-elastic:2
           ports:
             - containerPort: 9200
             - containerPort: 9300
