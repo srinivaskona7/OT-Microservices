@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: empms-db
-          image: mysql:1 # Replace with the appropriate MySQL image
+          image: sriniv7654/ot-mysql:1 # Replace with the appropriate MySQL image
           ports:
             - containerPort: 3306
           volumeMounts:
