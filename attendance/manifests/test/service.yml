@@ -1,0 +1,14 @@
+iapiVersion: v1
+kind: Service
+metadata:
+  name: empms-attendance-service
+  namespace: default
+spec:
+  selector:
+    app: empms-attendance
+  ports:
+    - protocol: TCP
+      port: 8081 
+      targetPort: 8081 
+  type: ClusterIP 
+
