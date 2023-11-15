@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: empms-db-deployment
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
         - name: empms-db
-          image: mysql:latest # Replace with the appropriate MySQL image
+          image: sriniv7654/ot-mysql:1 # Replace with the appropriate MySQL image
           ports:
             - containerPort: 3306
           volumeMounts:
