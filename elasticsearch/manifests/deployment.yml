@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: empms-es
-          image: sriniv7654/ot-elastic:1
+          image: sriniv7654/ot-elastic:2
           volumeMounts:
             - name: config-volume
               mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
