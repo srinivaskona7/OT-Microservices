@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: sriniv7654/ultimate-cicd:2
+        image: sriniv7654/ultimate-cicd:1
         ports:
         - containerPort: 8080
 
@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
         - name: empms-attendance
-          image: sriniv7654/attendance:
+          image: sriniv7654/attendance:1
           volumeMounts:
             - name: config-volume
               mountPath: /app/config.yaml
