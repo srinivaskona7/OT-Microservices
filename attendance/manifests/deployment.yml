@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: empms-attendance
-          image: sriniv7654/attendance:
+          image: sriniv7654/attendance:1
           volumeMounts:
             - name: config-volume
               mountPath: /app/config.yaml
