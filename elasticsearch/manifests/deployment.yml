@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: empms-es-deployment
-  namespace: default
 spec:
   replicas: 1
   selector:
@@ -15,21 +14,21 @@ spec:
     spec:
       containers:
         - name: empms-es
-          image: sriniv7654/ot-elastic:2
-          volumeMounts:
-            - name: config-volume
-              mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
-              readOnly: true
+          image: docker.elastic.co/elasticsearch/elasticsearch:8.4.3 # Elasticsearch image version
           ports:
             - containerPort: 9200
             - containerPort: 9300
           env:
             - name: ES_JAVA_OPTS
-              value: "-Xmx512m -Xms512m"
+              value: "-Xms512m -Xmx1024m"
             - name: ELASTIC_PASSWORD
-              value: elastic
+              value: "elastic" # Define the password here
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+              subPath: elasticsearch.yml
+              readOnly: true
       volumes:
         - name: config-volume
-          hostPath:
-            path: ./elasticsearch/elasticsearch.yml # Replace with the path to your elasticsearch.yml
-
+          configMap:
+            name: empms-es-config
