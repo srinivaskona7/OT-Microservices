@@ -42,7 +42,7 @@ pipeline {
                     sed -i "s|\\(image: .*:\\)[0-9a-zA-Z_-]*|\\1${BUILD_NUMBER}|" attendance/manifests/deployment.yml
                     git add attendance/manifests/deployment.yml
                     git commit -am "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                 '''
             }
         }
