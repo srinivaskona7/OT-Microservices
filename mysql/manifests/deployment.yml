@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empms-db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: empms-db
+  template:
+    metadata:
+      labels:
+        app: empms-db
+    spec:
+      containers:
+        - name: empms-db
+          image: mysql:latest # Replace with the appropriate MySQL image
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "password"
+            - name: MYSQL_DATABASE
+              value: "attendance_db"
+      volumes:
+        - name: mysql-data
+          emptyDir: {}
+
