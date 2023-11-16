@@ -1,0 +1,36 @@
+# combined.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ot-frontend
+  labels:
+    app: ot-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ot-frontend
+  template:
+    metadata:
+      labels:
+        app: ot-frontend
+    spec:
+      containers:
+        - name: ot-frontend
+          image: sriniv7654/ot-frontend:1
+          ports:
+            - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ot-frontend-service
+spec:
+  selector:
+    app: ot-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+
