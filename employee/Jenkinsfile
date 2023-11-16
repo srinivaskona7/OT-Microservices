@@ -14,13 +14,13 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "sriniv7654/ot-salary:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "sriniv7654/ot-employee:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "attendance/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
         script {
-            sh 'cd attendance && docker build -t ${DOCKER_IMAGE} .'
+            sh 'cd employee && docker build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
                 dockerImage.push()
@@ -39,8 +39,8 @@ pipeline {
                     git config user.email "srinivas-kona@gmail.com"
                     git config user.name "Srinivas Kona"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s|\\(image: .*:\\)[0-9a-zA-Z_-]*|\\1${BUILD_NUMBER}|" salary/manifests/deployment.yml
-                    git add salary/manifests/deployment.yml
+                    sed -i "s|\\(image: .*:\\)[0-9a-zA-Z_-]*|\\1${BUILD_NUMBER}|" salary/manifests/deployment-service.yaml
+                    git add salary/manifests/deployment-service.yaml
                     git commit -am "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                 '''
