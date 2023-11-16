@@ -18,7 +18,7 @@ spec:
         - name: ot-employee
           image: sriniv7654/ot-employee:1
           ports:
-            - containerPort: 8080
+            - containerPort: 8083
           env:
             - name: SPRING_ELASTICSEARCH_REST_URIS
               value: "172.18.0.4:9200"
@@ -37,5 +37,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 8083
 
