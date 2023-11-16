@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: empms-attendance-service
+  labels:
+    app: empms-attendance
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80  # The port your application listens on inside the pod
+      targetPort: 8081  # The port your application listens on inside the container
+  selector:
+    app: empms-attendance
