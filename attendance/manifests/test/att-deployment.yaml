@@ -18,6 +18,8 @@ spec:
       containers:
         - name: empms-attendance
           image: sriniv7654/ot-attendence:empms-db-service
+          ports:
+            - containerPort: 8081  # Define the container port here
           env:
             - name: CONFIG_FILE
               value: "/app/config/config.yaml"
