@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.9.18-alpine
 
 MAINTAINER OpsTree Solutions
 

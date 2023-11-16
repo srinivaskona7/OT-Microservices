@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ot-notification
+  labels:
+    app: ot-notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ot-notification
+  template:
+    metadata:
+      labels:
+        app: ot-notification
+    spec:
+      containers:
+        - name: ot-notification
+          image: sriniv7654/ot-notification:1
+          ports:
+            - containerPort: 8082
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ot-notification-service
+spec:
+  selector:
+    app: ot-notification
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8082
+
