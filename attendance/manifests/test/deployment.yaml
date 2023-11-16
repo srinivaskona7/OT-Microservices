@@ -1,33 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: nginx-deployment
   labels:
-    app.kubernetes.io/instance: attendance
-  name: empms-attendance
-  namespace: default
+    app: nginx
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: empms-attendance
+      app: nginx
   template:
     metadata:
       labels:
-        app: empms-attendance
+        app: nginx
     spec:
       containers:
-        - name: empms-attendance
-          image: sriniv7654/attendance:empms-db-service
-          env:
-            - name: CONFIG_FILE
-              value: "/app/config.yaml"
-            - name: API_PORT
-              value: "8081"
-            - name: DB_NAME
-              value: "attendance_db"
-            - name: DB_HOST
-              value: "empms-db-service" # Update to use the service name
-            - name: DB_USERNAME
-              value: "root"
-            - name: DB_PASSWORD
-              value: "password"
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
