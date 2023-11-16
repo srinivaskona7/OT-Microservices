@@ -15,7 +15,8 @@ spec:
       containers:
         - name: empms-traefik
           image: traefik:v2.9
-          command:
+          command: ["traefik"]
+          args:
             - "--api.insecure=true"
             - "--providers.docker"
             - "--entrypoints.web.address=:80"
@@ -39,4 +40,3 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-
