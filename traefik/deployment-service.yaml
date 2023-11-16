@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empms-traefik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: empms-traefik
+  template:
+    metadata:
+      labels:
+        app: empms-traefik
+    spec:
+      containers:
+        - name: empms-traefik
+          image: traefik:v2.9
+          command:
+            - "--api.insecure=true"
+            - "--providers.docker"
+            - "--entrypoints.web.address=:80"
+            - "--providers.docker.exposedbydefault=false"
+          ports:
+            - containerPort: 80
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: empms-traefik-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: empms-traefik
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
