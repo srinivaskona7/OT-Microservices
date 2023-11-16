@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ot-salary
-          image: sriniv7654/ot-salary:1
+          image: sriniv7654/ot-salary:argo-es-svc
           ports:
             - containerPort: 8080
           env:
