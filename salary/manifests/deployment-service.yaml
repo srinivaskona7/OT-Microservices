@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ot-salary
+  name: ot-salary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ot-salary
+  template:
+    metadata:
+      labels:
+        app: ot-salary
+    spec:
+      containers:
+        - name: ot-salary
+          image: sriniv7654/ot-salary:1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_ELASTICSEARCH_REST_URIS
+              value: "172.18.0.4:9200"
+            - name: SPRING_ELASTICSEARCH_REST_USERNAME
+              value: "elastic"
+            - name: SPRING_ELASTICSEARCH_REST_PASSWORD
+              value: "elastic"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ot-salary
+  name: ot-salary-service
+spec:
+  selector:
+    app: ot-salary
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
+
