@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: empms-attendance
-          image: sriniv7654/attendance:2
+          image: sriniv7654/attendance:empms-db-service
           env:
             - name: CONFIG_FILE
               value: "/app/config.yaml"
